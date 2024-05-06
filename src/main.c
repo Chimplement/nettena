@@ -7,6 +7,8 @@
 #include <stdio.h>
 #include <stdint.h>
 
+#include "hexdump.h"
+
 #define PACKET_LEN 8192
 
 int get_ip_version(void* packet) {
@@ -27,6 +29,7 @@ void log_ip4_packet(void* packet) {
         htonl(ip4_hdr->daddr) & 0xFF,
         dst_address_str
     );
+    hexdump(packet, PACKET_LEN);
 }
 
 void log_ip6_packet(void* packet) {
@@ -43,6 +46,7 @@ void log_ip6_packet(void* packet) {
         ip6_hdr->ip6_dst.__in6_u.__u6_addr8[15],
         dst_address_str
     );
+    hexdump(packet, PACKET_LEN);
 }
 
 int main() {
