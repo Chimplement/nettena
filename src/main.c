@@ -6,6 +6,7 @@
 #include <arpa/inet.h>
 #include <stdio.h>
 #include <stdint.h>
+#include <string.h>
 
 #include "hexdump.h"
 
@@ -57,7 +58,7 @@ int main() {
 	}
 
     ssize_t bytes_received;
-    uint8_t packet[PACKET_LEN];
+    uint8_t packet[PACKET_LEN] = {0, };
     
     while (1)
     {
