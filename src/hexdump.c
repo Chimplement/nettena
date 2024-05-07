@@ -5,8 +5,6 @@
 
 #include "hexdump.h"
 
-#define DUMP_WIDTH 16
-
 bool is_null_line(void* line_start, size_t length_left) {
     for (size_t i = 0; i < length_left && i < DUMP_WIDTH; i++) {
         uint8_t byte = ((uint8_t*)line_start)[i];
@@ -37,18 +35,23 @@ void dump_line(void* line_start, size_t length_left) {
     }
 }
 
-void hexdump(void* start, size_t length) {
+void hexdump(void* start, size_t length, size_t max_rows) {
     bool last_was_null_line = false;
-    for (size_t i = 0; i < length; i += DUMP_WIDTH) {
+    size_t row_count = 0;
+    for (size_t i = 0; i < length && row_count < max_rows; i += DUMP_WIDTH) {
         if (is_null_line((uint8_t*)start + i, length - i)) {
             if (!last_was_null_line)
+            {
                 printf("*\n");
-            last_was_null_line = true;
+                last_was_null_line = true;
+                row_count += 1;
+            }
             continue;
         }
         printf("%#016lx ", i);
         dump_line((uint8_t*)start + i, length - i);
         printf("\n");
         last_was_null_line = false;
+        row_count += 1;
     }
 }

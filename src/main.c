@@ -30,7 +30,7 @@ void log_ip4_packet(void* packet) {
         htonl(ip4_hdr->daddr) & 0xFF,
         dst_address_str
     );
-    hexdump(packet, PACKET_LEN);
+    hexdump(packet, PACKET_LEN, PACKET_LEN / DUMP_WIDTH);
 }
 
 void log_ip6_packet(void* packet) {
@@ -47,7 +47,7 @@ void log_ip6_packet(void* packet) {
         ip6_hdr->ip6_dst.__in6_u.__u6_addr8[15],
         dst_address_str
     );
-    hexdump(packet, PACKET_LEN);
+    hexdump(packet, PACKET_LEN, PACKET_LEN / DUMP_WIDTH);
 }
 
 int main() {

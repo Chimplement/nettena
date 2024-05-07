@@ -3,6 +3,8 @@
 
 # include <stddef.h>
 
-void hexdump(void* start, size_t length);
+#define DUMP_WIDTH 16
+
+void hexdump(void* start, size_t length, size_t max_rows);
 
 #endif
