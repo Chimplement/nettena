@@ -24,7 +24,7 @@ void log_ip4_packet(void* packet) {
     inet_ntop(AF_INET, &ip4_hdr->saddr, src_address_str, INET_ADDRSTRLEN);
     inet_ntop(AF_INET, &ip4_hdr->daddr, dst_address_str, INET_ADDRSTRLEN);
 
-    printf("src: \x1b[38;5;%im%15s\x1b[39m dst: \x1b[38;5;%im%15s\x1b[39m\n",
+    printf("src: \x1b[38;5;%im%-15s\x1b[39m dst: \x1b[38;5;%im%-15s\x1b[39m\n",
         htonl(ip4_hdr->saddr) & 0xFF,
         src_address_str,
         htonl(ip4_hdr->daddr) & 0xFF,
@@ -41,7 +41,7 @@ void log_ip6_packet(void* packet) {
     inet_ntop(AF_INET6, &ip6_hdr->ip6_src, src_address_str, INET6_ADDRSTRLEN);
     inet_ntop(AF_INET6, &ip6_hdr->ip6_dst, dst_address_str, INET6_ADDRSTRLEN);
 
-    printf("src: \x1b[38;5;%im%39s\x1b[39m dst: \x1b[38;5;%im%39s\x1b[39m\n",
+    printf("src: \x1b[38;5;%im%-39s\x1b[39m dst: \x1b[38;5;%im%-39s\x1b[39m\n",
         ip6_hdr->ip6_src.__in6_u.__u6_addr8[15],
         src_address_str,
         ip6_hdr->ip6_dst.__in6_u.__u6_addr8[15],
