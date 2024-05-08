@@ -8,6 +8,7 @@
 #include <stdint.h>
 #include <string.h>
 
+#include "options.h"
 #include "hexdump.h"
 
 #define PACKET_LEN 8192
@@ -16,7 +17,7 @@ int get_ip_version(void* packet) {
     return ((*((uint8_t*) packet) & 0xF0) >> 4);
 }
 
-void log_ip4_packet(void* packet) {
+void log_ip4_packet(void* packet, options_t options) {
     struct iphdr* ip4_hdr = (struct iphdr*)packet;
 
     char src_address_str[INET_ADDRSTRLEN];
@@ -30,10 +31,13 @@ void log_ip4_packet(void* packet) {
         htonl(ip4_hdr->daddr) & 0xFF,
         dst_address_str
     );
-    hexdump(packet, PACKET_LEN, PACKET_LEN / DUMP_WIDTH);
+    if (options.content_line_limit == -1)
+        hexdump(packet, PACKET_LEN, PACKET_LEN / DUMP_WIDTH);
+    else
+        hexdump(packet, PACKET_LEN, options.content_line_limit);
 }
 
-void log_ip6_packet(void* packet) {
+void log_ip6_packet(void* packet, options_t options) {
     struct ip6_hdr* ip6_hdr = (struct ip6_hdr*)packet;
     
     char src_address_str[INET6_ADDRSTRLEN];
@@ -47,10 +51,15 @@ void log_ip6_packet(void* packet) {
         ip6_hdr->ip6_dst.__in6_u.__u6_addr8[15],
         dst_address_str
     );
-    hexdump(packet, PACKET_LEN, PACKET_LEN / DUMP_WIDTH);
+    if (options.content_line_limit == -1)
+        hexdump(packet, PACKET_LEN, PACKET_LEN / DUMP_WIDTH);
+    else
+        hexdump(packet, PACKET_LEN, options.content_line_limit);
 }
 
-int main() {
+int main(int argc, char* argv[]) {
+    options_t options = parse_options(argc, argv);
+
     int sock = socket(AF_PACKET, SOCK_DGRAM, htons(ETH_P_ALL));
 	if (sock == -1)
 	{
@@ -70,10 +79,10 @@ int main() {
         switch (get_ip_version(packet))
         {
             case 4:
-                log_ip4_packet(packet);
+                log_ip4_packet(packet, options);
                 break;
             case 6:
-                log_ip6_packet(packet);
+                log_ip6_packet(packet, options);
                 break;
             default:
                 break;
