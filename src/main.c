@@ -67,10 +67,11 @@ int main(int argc, char* argv[]) {
 	}
 
     ssize_t bytes_received;
-    uint8_t packet[PACKET_LEN] = {0, };
+    uint8_t packet[PACKET_LEN];
     
     while (1)
     {
+        memset(packet, 0, PACKET_LEN);
         bytes_received = recv(sock, packet, PACKET_LEN, 0);
         if (bytes_received == -1) {
             break;
