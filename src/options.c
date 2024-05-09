@@ -1,3 +1,5 @@
+#define _DEFAULT_SOURCE
+#include <arpa/inet.h>
 #include <stdlib.h>
 #include <getopt.h>
 
@@ -27,11 +29,13 @@ options_t parse_options(int argc, char* argv[]) {
                 break;
             case 's':
                 options.only_from_src = true;
-                // set src_addr
+                //check error
+                inet_aton(optarg, &options.src_addr);
                 break;
             case 'd':
                 options.only_from_dst = true;
-                // set dst_addr
+                //check error
+                inet_aton(optarg, &options.src_addr);
                 break;
             case '?':
                 // print help
