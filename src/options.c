@@ -31,11 +31,13 @@ options_t parse_options(int argc, char* argv[]) {
                 options.only_from_src = true;
                 //check error
                 inet_aton(optarg, &options.src_addr);
+                //parse ipv6
                 break;
             case 'd':
                 options.only_from_dst = true;
                 //check error
                 inet_aton(optarg, &options.src_addr);
+                //parse ipv6
                 break;
             case '?':
                 // print help
