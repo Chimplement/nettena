@@ -29,15 +29,19 @@ options_t parse_options(int argc, char* argv[]) {
                 break;
             case 's':
                 options.only_from_src = true;
-                //check error
-                inet_aton(optarg, &options.src_addr);
-                //parse ipv6
+                if (inet_pton(AF_INET, optarg, &options.src_addr) == 0) {
+                    if (inet_pton(AF_INET6, optarg, &options.src_addr) == 0) {
+                        //handle error
+                    }
+                }
                 break;
             case 'd':
                 options.only_from_dst = true;
-                //check error
-                inet_aton(optarg, &options.src_addr);
-                //parse ipv6
+                if (inet_pton(AF_INET, optarg, &options.dst_addr) == 0) {
+                    if (inet_pton(AF_INET6, optarg, &options.dst_addr) == 0) {
+                        //handle error
+                    }
+                }
                 break;
             case '?':
                 // print help
