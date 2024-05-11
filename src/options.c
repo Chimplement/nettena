@@ -17,8 +17,30 @@ void exit_error(char* error)
 
 void help(char* program_name)
 {
-	printf("Expected:\n");
-	printf("%s\n", program_name);
+    printf("%s ["UNDERLINE"OPTIONS"RESET_UNDERLINE"...]\n", program_name);
+    printf("\tListen to all the network traffic arriving at this computer and display their content.\n");
+    printf("\n");
+    printf(BOLD"OPTIONS"RESET_BOLD"\n");
+    printf("-n "UNDERLINE"LINE_LIMIT"RESET_UNDERLINE"\n");
+    printf("\tLimit the maximum amount of lines the packet hexdump will show to "UNDERLINE"LINE_LIMIT"RESET_UNDERLINE".\n");
+    printf("\n");
+    printf("-h\n");
+    printf("\tHide the packet hexdump, same as `-n 0`.\n");
+    printf("\n");
+    printf("-c\n");
+    printf("\tDisable address colors.\n");
+    printf("\n");
+    printf("-s "UNDERLINE"SOURCE_ADDRESS"RESET_UNDERLINE"\n");
+    printf("\tOnly display packets coming from "UNDERLINE"SOURCE_ADDRESS"RESET_UNDERLINE".\n");
+    printf("\tWhen combined with `-d` only the source or destination address has to match.\n");
+    printf("\n");
+    printf("-d "UNDERLINE"DESTINATION_ADDRESS"RESET_UNDERLINE"\n");
+    printf("\tOnly display packets coming from "UNDERLINE"DESTINATION_ADDRESS"RESET_UNDERLINE".\n");
+    printf("\tWhen combined with `-s` only the source or destination address has to match.\n");
+    printf("\n");
+    printf("-?\n");
+    printf("\tShows this menu.\n");
+    printf("\n");
 }
 
 options_t parse_options(int argc, char* argv[]) {
@@ -73,6 +95,7 @@ options_t parse_options(int argc, char* argv[]) {
                 break;
             case '?':
                 help(argv[0]);
+                exit(0);
                 break;
             default:
                 break;
