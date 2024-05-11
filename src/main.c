@@ -20,6 +20,22 @@ int get_ip_version(void* packet) {
 void log_ip4_packet(void* packet, options_t options) {
     struct iphdr* ip4_hdr = (struct iphdr*)packet;
 
+    if (options.only_from_src || options.only_from_dst) {
+        bool has_correct_src = (
+            options.only_from_src &&
+            options.src_family == AF_INET &&
+            *(uint32_t*)&options.src_addr == ip4_hdr->saddr
+        );
+        bool has_correct_dst = (
+            options.only_from_dst &&
+            options.dst_family == AF_INET &&
+            *(uint32_t*)&options.dst_addr == ip4_hdr->daddr
+        );
+        if (!has_correct_src && !has_correct_dst) {
+            return ;
+        }
+    }
+
     char src_address_str[INET_ADDRSTRLEN];
     char dst_address_str[INET_ADDRSTRLEN];
     inet_ntop(AF_INET, &ip4_hdr->saddr, src_address_str, INET_ADDRSTRLEN);
@@ -40,6 +56,22 @@ void log_ip4_packet(void* packet, options_t options) {
 void log_ip6_packet(void* packet, options_t options) {
     struct ip6_hdr* ip6_hdr = (struct ip6_hdr*)packet;
     
+    if (options.only_from_src || options.only_from_dst) {
+        bool has_correct_src = (
+            options.only_from_src &&
+            options.src_family == AF_INET6 &&
+            !memcmp(&options.dst_addr, &ip6_hdr->ip6_dst, sizeof(struct in6_addr))
+        );
+        bool has_correct_dst = (
+            options.only_from_dst &&
+            options.dst_family == AF_INET6 &&
+            !memcmp(&options.dst_addr, &ip6_hdr->ip6_dst, sizeof(struct in6_addr))
+        );
+        if (!has_correct_src && !has_correct_dst) {
+            return ;
+        }
+    }
+
     char src_address_str[INET6_ADDRSTRLEN];
     char dst_address_str[INET6_ADDRSTRLEN];
     inet_ntop(AF_INET6, &ip6_hdr->ip6_src, src_address_str, INET6_ADDRSTRLEN);
