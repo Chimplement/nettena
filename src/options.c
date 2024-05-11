@@ -29,16 +29,24 @@ options_t parse_options(int argc, char* argv[]) {
                 break;
             case 's':
                 options.only_from_src = true;
-                if (inet_pton(AF_INET, optarg, &options.src_addr) == 0) {
-                    if (inet_pton(AF_INET6, optarg, &options.src_addr) == 0) {
+                if (inet_pton(AF_INET, optarg, &options.src_addr) == 1) {
+                    options.src_family = AF_INET;
+                } else {
+                    if (inet_pton(AF_INET6, optarg, &options.src_addr) == 1) {
+                        options.src_family = AF_INET6;
+                    } else {
                         //handle error
                     }
                 }
                 break;
             case 'd':
                 options.only_from_dst = true;
-                if (inet_pton(AF_INET, optarg, &options.dst_addr) == 0) {
-                    if (inet_pton(AF_INET6, optarg, &options.dst_addr) == 0) {
+                if (inet_pton(AF_INET, optarg, &options.dst_addr) == 1) {
+                    options.dst_family = AF_INET;
+                } else {
+                    if (inet_pton(AF_INET6, optarg, &options.dst_addr) == 1) {
+                        options.dst_family = AF_INET6;
+                    } else {
                         //handle error
                     }
                 }
