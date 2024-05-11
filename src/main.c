@@ -7,6 +7,7 @@
 #include <stdio.h>
 #include <stdint.h>
 #include <string.h>
+#include <errno.h>
 
 #include "options.h"
 #include "hexdump.h"
@@ -95,7 +96,7 @@ int main(int argc, char* argv[]) {
     int sock = socket(AF_PACKET, SOCK_DGRAM, htons(ETH_P_ALL));
 	if (sock == -1)
 	{
-		return (1);
+		exit_error(strerror(errno));
 	}
 
     ssize_t bytes_received;

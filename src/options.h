@@ -16,6 +16,9 @@ typedef struct options_s {
     uint8_t dst_addr[sizeof(struct in6_addr)];
 } options_t;
 
+void exit_error(char* error);
+void help(char* program_name);
+
 options_t parse_options(int argc, char* argv[]);
 
 #endif
