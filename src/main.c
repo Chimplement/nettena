@@ -43,7 +43,7 @@ void log_ip4_packet(void* packet, options_t options) {
     inet_ntop(AF_INET, &ip4_hdr->saddr, src_address_str, INET_ADDRSTRLEN);
     inet_ntop(AF_INET, &ip4_hdr->daddr, dst_address_str, INET_ADDRSTRLEN);
 
-    printf("src: \x1b[38;5;%im%-15s\x1b[39m dst: \x1b[38;5;%im%-15s\x1b[39m\n",
+    printf("src: \x1b[38;5;%im%-15s"DEFAULT_COLOR" dst: \x1b[38;5;%im%-15s"DEFAULT_COLOR"\n",
         htonl(ip4_hdr->saddr) & 0xFF,
         src_address_str,
         htonl(ip4_hdr->daddr) & 0xFF,
