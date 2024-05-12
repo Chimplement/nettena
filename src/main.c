@@ -9,6 +9,7 @@
 #include <string.h>
 #include <errno.h>
 
+#include "ansi.h"
 #include "options.h"
 #include "hexdump.h"
 
@@ -78,7 +79,7 @@ void log_ip6_packet(void* packet, options_t options) {
     inet_ntop(AF_INET6, &ip6_hdr->ip6_src, src_address_str, INET6_ADDRSTRLEN);
     inet_ntop(AF_INET6, &ip6_hdr->ip6_dst, dst_address_str, INET6_ADDRSTRLEN);
 
-    printf("src: \x1b[38;5;%im%-39s\x1b[39m dst: \x1b[38;5;%im%-39s\x1b[39m\n",
+    printf("src: \x1b[38;5;%im%-39s"DEFAULT_COLOR": \x1b[38;5;%im%-39s"DEFAULT_COLOR"\n",
         ip6_hdr->ip6_src.__in6_u.__u6_addr8[15],
         src_address_str,
         ip6_hdr->ip6_dst.__in6_u.__u6_addr8[15],

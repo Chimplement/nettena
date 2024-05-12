@@ -13,5 +13,6 @@
 #define BLUE ESC"[34m"
 #define CYAN ESC"[36m"
 #define WHITE ESC"[37m"
+#define DEFAULT_COLOR ESC"[39m"
 
 #endif
