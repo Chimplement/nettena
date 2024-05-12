@@ -43,12 +43,15 @@ void log_ip4_packet(void* packet, options_t options) {
     inet_ntop(AF_INET, &ip4_hdr->saddr, src_address_str, INET_ADDRSTRLEN);
     inet_ntop(AF_INET, &ip4_hdr->daddr, dst_address_str, INET_ADDRSTRLEN);
 
-    printf("src: \x1b[38;5;%im%-15s"DEFAULT_COLOR" dst: \x1b[38;5;%im%-15s"DEFAULT_COLOR"\n",
-        htonl(ip4_hdr->saddr) & 0xFF,
-        src_address_str,
-        htonl(ip4_hdr->daddr) & 0xFF,
-        dst_address_str
-    );
+    printf("src: ");
+    if (options.addr_colors) printf("\x1b[38;5;%im", htonl(ip4_hdr->saddr) & 0xFF);
+    printf("%-15s ", src_address_str);
+    if (options.addr_colors) printf(DEFAULT_COLOR);
+    printf("src: ");
+    if (options.addr_colors) printf("\x1b[38;5;%im", htonl(ip4_hdr->daddr) & 0xFF);
+    printf("%-15s ", dst_address_str);
+    if (options.addr_colors) printf(DEFAULT_COLOR);
+    printf("\n");
     if (options.content_line_limit == -1)
         hexdump(packet, PACKET_LEN, PACKET_LEN / DUMP_WIDTH);
     else
