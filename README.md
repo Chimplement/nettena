@@ -25,3 +25,4 @@ to give it the required capabilities only.
 After which you can run it without sudo.
 
 ## Why
+I made Nettena because I wanted to ease myself into raw socket programming because I am planning to make an arp-spoofer, and this seemed like a good complimentary project. But seeing your computers network traffic is also very interesting.
