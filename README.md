@@ -8,7 +8,7 @@ For a list of all options run:
 ```
 
 ## Using
-Nettena works without providing any additional arguments like this:
+Nettena will work without providing any additional arguments like this:
 ```bash
 ./nettena
 ```
