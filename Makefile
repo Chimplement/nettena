@@ -1,6 +1,6 @@
 # project
 
-NAME	= nettenna
+NAME	= nettena
 
 SRC_DIR	= src
 SRC		= $(shell find $(SRC_DIR)/ -type f -name "*.c")
