@@ -1,5 +1,5 @@
 # Nettena
-Nettena is a small network sniffer which logs all network traffic coming in to or out of you computer.
+Nettena is a small network sniffer which can log all network traffic coming in to or out of your computer.
 ## Features
 By default Nettena will log all incoming and outgoing packets on the stdout, including the source and destination ip addresses. Nettena will log the content of the packet as a hexdump. In the hexdump multiple lines of all zeros will be condensed into a single `*`. The hexdump can also be disabled with the `-h` flag.
 
