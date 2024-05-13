@@ -48,7 +48,7 @@ void hexdump(void* start, size_t length, size_t max_rows) {
             }
             continue;
         }
-        printf("%#016lx ", i);
+        printf("0x%016lx ", i);
         dump_line((uint8_t*)start + i, length - i);
         printf("\n");
         last_was_null_line = false;
