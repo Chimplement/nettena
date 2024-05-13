@@ -44,11 +44,11 @@ void log_ip4_packet(void* packet, options_t options) {
     inet_ntop(AF_INET, &ip4_hdr->daddr, dst_address_str, INET_ADDRSTRLEN);
 
     printf("src: ");
-    if (options.addr_colors) printf("\x1b[38;5;%im", htonl(ip4_hdr->saddr) % 231);
+    if (options.addr_colors) printf("\x1b[38;5;%im", 1 + htonl(ip4_hdr->saddr) % 231);
     printf("%-15s ", src_address_str);
     if (options.addr_colors) printf(DEFAULT_COLOR);
     printf(" dst: ");
-    if (options.addr_colors) printf("\x1b[38;5;%im", htonl(ip4_hdr->daddr) % 231);
+    if (options.addr_colors) printf("\x1b[38;5;%im", 1 + htonl(ip4_hdr->daddr) % 231);
     printf("%-15s ", dst_address_str);
     if (options.addr_colors) printf(DEFAULT_COLOR);
     printf("\n");
