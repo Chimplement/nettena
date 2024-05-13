@@ -44,11 +44,11 @@ void log_ip4_packet(void* packet, options_t options) {
     inet_ntop(AF_INET, &ip4_hdr->daddr, dst_address_str, INET_ADDRSTRLEN);
 
     printf("src: ");
-    if (options.addr_colors) printf("\x1b[38;5;%im", htonl(ip4_hdr->saddr) & 0xFF);
+    if (options.addr_colors) printf("\x1b[38;5;%im", htonl(ip4_hdr->saddr) % 231);
     printf("%-15s ", src_address_str);
     if (options.addr_colors) printf(DEFAULT_COLOR);
     printf(" dst: ");
-    if (options.addr_colors) printf("\x1b[38;5;%im", htonl(ip4_hdr->daddr) & 0xFF);
+    if (options.addr_colors) printf("\x1b[38;5;%im", htonl(ip4_hdr->daddr) % 231);
     printf("%-15s ", dst_address_str);
     if (options.addr_colors) printf(DEFAULT_COLOR);
     printf("\n");
@@ -84,11 +84,11 @@ void log_ip6_packet(void* packet, options_t options) {
     inet_ntop(AF_INET6, &ip6_hdr->ip6_dst, dst_address_str, INET6_ADDRSTRLEN);
 
     printf("src: ");
-    if (options.addr_colors) printf("\x1b[38;5;%im", ip6_hdr->ip6_src.__in6_u.__u6_addr8[15]);
+    if (options.addr_colors) printf("\x1b[38;5;%im", ip6_hdr->ip6_src.__in6_u.__u6_addr32[3] % 231);
     printf("%-39s ", src_address_str);
     if (options.addr_colors) printf(DEFAULT_COLOR);
     printf(" dst: ");
-    if (options.addr_colors) printf("\x1b[38;5;%im", ip6_hdr->ip6_dst.__in6_u.__u6_addr8[15]);
+    if (options.addr_colors) printf("\x1b[38;5;%im", ip6_hdr->ip6_dst.__in6_u.__u6_addr32[3] % 231);
     printf("%-39s ", dst_address_str);
     if (options.addr_colors) printf(DEFAULT_COLOR);
     printf("\n");
