@@ -7,6 +7,8 @@ For a list of all options run:
 ./nettena -?
 ```
 
+Nettena will log the content of the packet as a hexdump. In the hexdump multiples lines of all zeros will be condensed into a single `*`. The hexdump can also be disabled with the `-h` flag.
+
 ## Using
 Nettena will work without providing any additional arguments like this:
 ```bash
