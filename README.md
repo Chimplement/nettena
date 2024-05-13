@@ -19,7 +19,7 @@ and it will keep waiting for incoming packets and print them in this format:
 src: [source address] dst: [destination address]
 [packet hex dump]
 ```
-Keep in mind that the content also contains the ip header and the the transport layers header.
+Keep in mind that the content also contains the ip header and the the transport layer's header.
 
 ### Building
 Building is as simple as running make:
