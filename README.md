@@ -1,7 +1,9 @@
 # Nettena
 Nettena is a small network sniffer which logs all network traffic coming in to or out of you computer.
 ## Features
-Nettena comes with a couple useful features like only showing traffic from or to certain addresses, or limiting the amount of output lines per packet.
+By default Nettena will log all incoming and outgoing packets on the stdout, including the source and destination ip addresses.
+
+Nettena comes with a couple useful options like only showing traffic from or to certain addresses, or limiting the amount of output lines per packet.
 For a list of all options run:
 ```bash
 ./nettena -?
