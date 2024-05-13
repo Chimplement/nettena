@@ -1,6 +1,5 @@
 # Nettena
-
-
+Nettena is a small network sniffer which logs all network traffic coming in to or out of you computer.
 ## Features
 
 
