@@ -12,7 +12,7 @@ Nettena works without providing any additional arguments like this:
 ```bash
 ./nettena
 ```
-and it will keep running and print every packet received in this format:
+and it will keep waiting for incoming packets and print them in this format:
 ```
 src: [source address] dst: [destination address]
 [packet hex dump]
